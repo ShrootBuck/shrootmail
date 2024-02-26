@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shrootmail/inbox.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'ShrootMail',
       theme: ThemeData(
         colorScheme: const ColorScheme.dark(
-            primary: Colors.deepPurple,
-            secondary: Colors.purple,
-            tertiary: Colors.purple),
+            primary: Colors.lightBlue,
+            secondary: Colors.blue,
+            tertiary: Colors.blueAccent),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'ShrootMail'),
@@ -33,37 +34,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              transitionDuration: const Duration(
+                  milliseconds:
+                      100), // Adjust duration as element width is desired
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const SecondRoute(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0, 1),
+                    end: const Offset(0, 0),
+                  ).animate(animation),
+                  child: child,
+                );
+              },
+            ),
+          );
+        },
         tooltip: 'Compose',
         child: const Icon(Icons.add),
       ),
