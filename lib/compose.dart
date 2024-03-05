@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
 
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({super.key});
+class Compose extends StatelessWidget {
+  const Compose({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,15 +10,20 @@ class SecondRoute extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Second Route'),
       ),
-      body: const Text('e'),
+      body: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration.collapsed(hintText: "hintText"),
+          )
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pop(
             context,
             PageRouteBuilder(
-              transitionDuration: const Duration(milliseconds: 100),
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  const SecondRoute(),
+                  const Compose(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return SlideTransition(

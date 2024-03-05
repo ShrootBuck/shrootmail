@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shrootmail/inbox.dart';
+import 'package:shrootmail/compose.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,11 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
             context,
             PageRouteBuilder(
-              transitionDuration: const Duration(
-                  milliseconds:
-                      100), // Adjust duration as element width is desired
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  const SecondRoute(),
+                  const Compose(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return SlideTransition(
